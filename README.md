@@ -1,7 +1,7 @@
 # Automation Project: CURA Healthcare Service
 
 ## Overview
-This automation project demonstrates testing capabilities using Playwright with JavaScript and ExcelJS to enhance my portfolio. The project focuses on automating the appointment booking process for the CURA Healthcare Service application.
+This automation project demonstrates testing capabilities using Playwright with JavaScript and ExcelJS. The project focuses on automating the appointment booking process for the CURA Healthcare Service application.
 
 ## Technologies Used
 - **Playwright**: A Node.js library for browser automation.
