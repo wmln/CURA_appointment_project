@@ -1,23 +1,30 @@
 # Automation Project: CURA Healthcare Service
 
 ## Overview
-This automation project demonstrates testing capabilities using Playwright with JavaScript and ExcelJS. The project focuses on automating the appointment booking process for the CURA Healthcare Service application.
+This automation project demonstrates testing capabilities using Playwright with JavaScript and ExcelJS. The project focuses on automating the appointment booking process for the CURA Healthcare Service application. The Page Object Model (POM) design pattern has been implemented to enhance the maintainability and readability of the test code. By using POM, the project separates the page interactions from the test logic, making the tests easier to manage and scale.
 
 ## Technologies Used
 - **Playwright**: A Node.js library for browser automation.
 - **JavaScript**: The programming language used for writing the test scripts.
 - **ExcelJS**: A library for reading data from Excel files, utilized to manage appointment data.
+- **Page Object Model (POM)**: A design pattern that separates the test logic from the UI interactions, allowing for easier maintenance and scalability of the test suite.
 
 ## Project Structure
 ```plaintext
 /tests
-├── Login.spec.js
+├── LoginValidations.spec.js
 ├── SingleBookAppointment.spec.js
-└── MultipleBookAppointments.spec.js
+├── MultipleBookAppointments.spec.js
+/page_objects
+├── LoginPage.js
+├── BookAppointment.js
+├── AppointmentHistoryPage.js
+├── POManager.js
+
 ```
 
 ## Test Files
-### Login.spec.js
+### LoginValidations.spec.js
 - Tests the login functionality of the CURA application.
 - Validates both successful and failed login scenarios.
 
