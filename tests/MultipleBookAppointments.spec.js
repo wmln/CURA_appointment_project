@@ -55,7 +55,7 @@ test.beforeAll(async ({ browser }) => {
 
 test('Multiple Book Appointments', async () => {
     // Read data from the Excel file
-    const filePath = "c:/Users/walte/Downloads/cura_project_appointments.xlsx"; // Update with your Excel file path
+    const filePath = "YOUR/FILE/PATH/HERE"; // Update with your Excel file path
     const appointments = await readExcelData(filePath);
     const bookAppointment = await poManager.getBookAppointment();
 
