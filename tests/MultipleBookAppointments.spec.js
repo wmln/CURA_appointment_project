@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import POManager from '../page_objects/POManager';
-import { readExcelData } from '../utils/excelReader';
+import { readExcelData } from '../utils/ExcelReader';
 
 
 let page;
