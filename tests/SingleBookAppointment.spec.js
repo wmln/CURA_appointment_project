@@ -29,16 +29,16 @@ test('Book Appointment', async () => {
     const date = { day: "1", month: "6", year: "2024" };
     const comment = "This is a comment about the patient";
 
-    const bookAppointment = await poManager.getBookAppointment();
-    await bookAppointment.selectDropDownFacility(dropDownFacility);
-    await bookAppointment.selectCheckboxApplyReadmission(applyReadmission);
+    const bookAppointmentPage = await poManager.getBookAppointmentPage();
+    await bookAppointmentPage.selectDropDownFacility(dropDownFacility);
+    await bookAppointmentPage.selectCheckboxApplyReadmission(applyReadmission);
     await expect(page.locator("#chk_hospotal_readmission")).toBeChecked();
-    await bookAppointment.selectRadioButtonHealthcareProgram(healthcareProgram);
+    await bookAppointmentPage.selectRadioButtonHealthcareProgram(healthcareProgram);
     // padStart ensures the string is at least 2 characters long, even when date comes as a single digit, adding a leading zero
     const dateString = `${date.day.padStart(2, '0')}/${date.month.padStart(2, '0')}/${date.year}`;
-    await bookAppointment.selectCalendarDate(dateString);
-    await bookAppointment.inputTextComment(comment);
-    await bookAppointment.confirmBookAppointment();
+    await bookAppointmentPage.selectCalendarDate(dateString);
+    await bookAppointmentPage.inputTextComment(comment);
+    await bookAppointmentPage.confirmBookAppointment();
 
     // Confirmation page assertions
     const confirmationTitle = await page.locator(".text-center h2").textContent();

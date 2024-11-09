@@ -1,4 +1,4 @@
-class BookAppointment {
+class BookAppointmentPage {
     constructor(page) {
         this.page = page;
     }
@@ -48,8 +48,6 @@ class BookAppointment {
         await this.page.locator(".datepicker-months span").nth(month - 1).click(); // Months are 0-indexed
         await this.page.locator(`//td[text() = '${day}']`).first().click();
         // Backticks(`) enable string interpolation, using ${expression}. No need to concatenate (+) and escape (\)
-
-
     }
 
     async inputTextComment(comment){
@@ -61,4 +59,4 @@ class BookAppointment {
     }
 
 }
-export default BookAppointment;
+export default BookAppointmentPage;

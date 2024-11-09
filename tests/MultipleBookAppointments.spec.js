@@ -1,34 +1,12 @@
 import { test, expect } from '@playwright/test';
 import POManager from '../page_objects/POManager';
-const ExcelJS = require('exceljs');
+import { readExcelData } from '../utils/excelReader';
+
 
 let page;
 let poManager;
 let loginPage;
 let appointmentHistoryPage;
-
-// Read data from the Excel file using exceljs
-async function readExcelData(filePath) {
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(filePath);
-    const worksheet = workbook.worksheets[0]; // Assuming you want the first worksheet
-    const data = [];
-
-    // Iterate through rows starting from the second row
-    worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-        if (rowNumber > 1) { // Skip header row 
-            data.push({
-                dropDownFacility: row.getCell(1).value,
-                applyReadmission: row.getCell(2).value,
-                healthcareProgram: row.getCell(3).value,
-                date: String(row.getCell(4).value).trim(), // Ensure date is a trimmed string
-                comment: row.getCell(5).value,
-            });
-        }
-    });
-
-    return data;
-}
 
 test.beforeAll(async ({ browser }) => {
     // Create a new browser context with specified properties 
@@ -54,25 +32,24 @@ test.beforeAll(async ({ browser }) => {
 });
 
 test('Multiple Book Appointments', async () => {
-    // Read data from the Excel file
-    const filePath = "c:/Users/walte/Downloads/cura_project_appointments.xlsx"; // Update with your Excel file path
-    const appointments = await readExcelData(filePath);
-    const bookAppointment = await poManager.getBookAppointment();
+    // Read data from the Excel file 
+    const appointments = await readExcelData("./data/cura_project_appointments.xlsx"); // Update with your Excel file path
+    const bookAppointmentPage = await poManager.getBookAppointmentPage();
 
     for (const { dropDownFacility, applyReadmission, healthcareProgram, date, comment } of appointments) {
         await loginPage.clickMakeAppointment(); // Click to make a new appointment
         await page.locator("#combo_facility").waitFor({ state: 'visible' });
-        await bookAppointment.selectDropDownFacility(dropDownFacility);
-        await bookAppointment.selectCheckboxApplyReadmission(applyReadmission);
+        await bookAppointmentPage.selectDropDownFacility(dropDownFacility);
+        await bookAppointmentPage.selectCheckboxApplyReadmission(applyReadmission);
         if (applyReadmission.toLowerCase() === 'yes') {
             await expect(page.locator("#chk_hospotal_readmission")).toBeChecked();
         } else {
             await expect(page.locator("#chk_hospotal_readmission")).not.toBeChecked();
         }
-        await bookAppointment.selectRadioButtonHealthcareProgram(healthcareProgram);
-        await bookAppointment.selectCalendarDate(date);
-        await bookAppointment.inputTextComment(comment);
-        await bookAppointment.confirmBookAppointment();
+        await bookAppointmentPage.selectRadioButtonHealthcareProgram(healthcareProgram);
+        await bookAppointmentPage.selectCalendarDate(date);
+        await bookAppointmentPage.inputTextComment(comment);
+        await bookAppointmentPage.confirmBookAppointment();
         await page.waitForSelector(".text-center h2", { state: 'visible' }); // Wait for the title to be visible
 
         // Confirmation page assertions

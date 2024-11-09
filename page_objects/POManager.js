@@ -1,11 +1,11 @@
 import LoginPage from '../page_objects/LoginPage';
-import BookAppointment from '../page_objects/BookAppointment';
+import BookAppointmentPage from '../page_objects/BookAppointmentPage';
 import AppointmentHistoryPage from '../page_objects/AppointmentHistoryPage';
 
 class POManager {
     constructor(page){
         this.loginPage = new LoginPage(page);
-        this.bookAppointment = new BookAppointment(page);
+        this.bookAppointmentPage = new BookAppointmentPage(page);
         this.appointmentHistoryPage = new AppointmentHistoryPage(page);
     }
     
@@ -13,8 +13,8 @@ class POManager {
         return this.loginPage;
     }
 
-    getBookAppointment(){
-        return this.bookAppointment;
+    getBookAppointmentPage(){
+        return this.bookAppointmentPage;
     }
 
     getAppointmentHistoryPage(){
