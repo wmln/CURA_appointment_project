@@ -17,9 +17,13 @@ This automation project demonstrates testing capabilities using Playwright with 
 ├── MultipleBookAppointments.spec.js
 /page_objects
 ├── LoginPage.js
-├── BookAppointment.js
+├── BookAppointmentPage.js
 ├── AppointmentHistoryPage.js
 ├── POManager.js
+/utils
+├── ExcelReader.js
+/data
+├── cura_project_appointments.xlsx 
 
 ```
 
