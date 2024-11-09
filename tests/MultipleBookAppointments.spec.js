@@ -32,16 +32,9 @@ test.beforeAll(async ({ browser }) => {
 });
 
 test('Multiple Book Appointments', async () => {
-<<<<<<< HEAD
     // Read data from the Excel file 
     const appointments = await readExcelData("./data/cura_project_appointments.xlsx"); // Update with your Excel file path
     const bookAppointmentPage = await poManager.getBookAppointmentPage();
-=======
-    // Read data from the Excel file
-    const filePath = "YOUR/FILE/PATH/HERE"; // Update with your Excel file path
-    const appointments = await readExcelData(filePath);
-    const bookAppointment = await poManager.getBookAppointment();
->>>>>>> c5557765b3be7a1ec0b41194bfacf9ed7f3fc684
 
     for (const { dropDownFacility, applyReadmission, healthcareProgram, date, comment } of appointments) {
         await loginPage.clickMakeAppointment(); // Click to make a new appointment
