@@ -2,7 +2,9 @@
   "name": "cura_appointment_project",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "regression": "npx playwright test --headed"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
