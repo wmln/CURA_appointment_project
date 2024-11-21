@@ -4,21 +4,21 @@ import POManager from '../page_objects/POManager';
 let page;
 let poManager;
 let loginPage;
+let username;
+let password;
 
 test.beforeAll(async ({ browser }) => {
     // Launch a new browser page
     page = await browser.newPage();
     poManager = new POManager(page);
     loginPage = poManager.getLoginPage();
+    await loginPage.navigate();
+    await loginPage.clickMakeAppointment();
+    username = await page.getByPlaceholder("Username").first().inputValue();
+    password = await page.getByPlaceholder("Password").first().inputValue();
 });
 
 test('Wrong Login validations', async () => {
-
-    await loginPage.navigate();
-    await expect(page).toHaveTitle("CURA Healthcare Service");
-    await loginPage.clickMakeAppointment();
-    const username = await page.getByPlaceholder("Username").first().inputValue();
-    const password = await page.getByPlaceholder("Password").first().inputValue();
 
     // Both blank
     await loginPage.login("", "");
@@ -54,6 +54,9 @@ test('Wrong Login validations', async () => {
     await loginPage.login(username, "ThisIsNotAPasswor");
     expect(await page.locator(".col-sm-12 p").last().textContent()).toContain("Login failed");
 
+});
+
+test('Correct Login validations', async () => {
     // Correct username and password
     await page.getByPlaceholder("Username").last().clear();
     await page.getByPlaceholder("Password").last().clear();
